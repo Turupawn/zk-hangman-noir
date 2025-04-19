@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    .outer {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .inner {
+        width: 45%;
+        border: 1px solid black;
+        padding: 10px;
+        word-wrap: break-word;
+    }
+    #connected_section, #forms, #forms {
+      display: none;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.3.5/web3.min.js"></script>
+</head>
+<body>
+  <script type="module" src="/index.js"></script>
+  <h1>Noir app</h1>
+  
+  <div id="web3_message"></div>
+  <button id="connect_button" onclick="connectWallet()" style="display: none;">Connect Wallet</button>
+  
+  <div id="connected_section">
+    <div id="wallet_address"></div>
+    
+    <div id="forms">
+      <h3>Admin: Set Word</h3>
+      <input id="admin_word" type="text" placeholder="Enter word (max 10 chars)" maxlength="10" />
+      <button id="admin_submit">Submit as Admin</button>
+      <h3>Player: Guess Word</h3>
+      <input id="player_word" type="text" placeholder="Enter word (max 10 chars)" maxlength="10" />
+      <input id="winner-address" type="text" pattern="^0x[a-fA-F0-9]{40}$" value="0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045" />
+      <button id="player_submit">Submit as Player</button>
+    </div>
+  </div>
+
+  <div class="outer">
+    <div id="logs" class="inner"><h2>Logs</h2></div>
+    <div id="results" class="inner"><h2>Proof</h2></div>
+  </div>
+</body>
+</html>
