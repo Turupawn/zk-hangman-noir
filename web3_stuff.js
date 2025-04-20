@@ -1,5 +1,5 @@
 const NETWORK_ID = 17000 // Holesky
-const CONTRACT_ADDRESS = "0x619b3dd058fB0c189af85fF23300fddA7beEB5F5"
+const CONTRACT_ADDRESS = "0xfb89Fb2a693e71B237cE2E6A4CC2EEbFb59034c9"
 
 // Define ABI directly instead of loading from file
 const CONTRACT_ABI = [
@@ -112,6 +112,8 @@ function onWalletConnected() {
 
 // Contract interaction functions
 async function submitAdminProof(proofBytes, publicInputs) {
+  console.log(proofBytes);
+  console.log(publicInputs);
   try {
     await contract.methods.init(proofBytes, publicInputs)
       .send({ from: accounts[0] })

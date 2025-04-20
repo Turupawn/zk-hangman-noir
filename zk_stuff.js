@@ -35,7 +35,7 @@ export async function generateProof(word, winnerAddress) {
   show("logs", "Generated witness... ✅");
   
   show("logs", "Generating proof... ⏳");
-  const proof = await backend.generateProof(witness, { keccak: false }, 123);
+  const proof = await backend.generateProof(witness, { keccak: true });
   show("logs", "Generated proof... ✅");
 
   show('logs', 'Verifying proof... ⌛');
