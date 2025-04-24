@@ -10,7 +10,7 @@ contract SimpleHangman {
     address public winner;
 
     // Al iniciar el juego, almacenamos un commitment a la palabra con la que jugaremos
-  constructor bytes32 _wordHash) payable {
+  constructor (bytes32 _wordHash) payable {
         wordHash = _wordHash;
     }
     // Intenta adivinar la palabra oculta
