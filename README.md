@@ -30,7 +30,7 @@ flowchart LR
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) (v16+)
+- [Node.js](https://nodejs.org/) (v20+)
 - [Bun](https://bun.sh/) (for package management and dev server)
 - [MetaMask](https://metamask.io/) or any EVM-compatible wallet
 - Holesky testnet (Network ID: `17000`)
