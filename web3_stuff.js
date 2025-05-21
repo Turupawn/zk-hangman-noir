@@ -1,5 +1,5 @@
 const NETWORK_ID = 17000 // Holesky
-const CONTRACT_ADDRESS = "0xfb89Fb2a693e71B237cE2E6A4CC2EEbFb59034c9"
+const CONTRACT_ADDRESS = "0xF2Ba0B0d97950ecB81d086a721153b5f17964e8a"
 
 // Define ABI directly instead of loading from file
 const CONTRACT_ABI = [

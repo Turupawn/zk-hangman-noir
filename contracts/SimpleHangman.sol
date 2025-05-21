@@ -1,24 +1,41 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.22;
 
+// Interfaz de contrato verificador ZK
+interface IVerifier {
+    function verify(bytes calldata _proof, bytes32[] calldata _publicInputs) external view returns (bool);
+}
+
 // Contrato demostración de equemas de commit-reveal
 contract SimpleHangman {
-    // El commitment de la palabra por adivinar, este se calcula con keccak256(word)
-    // Aunque esto esconde una palabra, no provee ninguna garantía que es una palabra válida
+    // El commitment de la palablra por adivinar, este se calcula con keccak256(word)
     bytes32 public wordHash;
-    // El address del ganador, quien adivinó la palabra
+    // La cantidad de letras en la palabra secreta
+    uint public wordLength;
+    // El address de quien adivinó la palablra
     address public winner;
+    // Contrato verificador de las pruebas ZK
+    IVerifier verifier;
+
+    constructor(address verifierAddress) {
+        verifier = IVerifier(verifierAddress);
+    }
 
     // Al iniciar el juego, almacenamos un commitment a la palabra con la que jugaremos
-  constructor (bytes32 _wordHash) payable {
-        wordHash = _wordHash;
+    function init(bytes calldata _proof, bytes32[] calldata _publicInputs) public {
+        require(verifier.verify( _proof, _publicInputs), "Invalid proof");
+        wordLength = uint(_publicInputs[0]);
+        wordHash = _publicInputs[2];
     }
+
     // Intenta adivinar la palabra oculta
-    // Esto es sujeto a un ataque de frontrunn, el atacante puede ver la palabra en la mempool y pagar mas gas para ganar
-    function playWord(string memory word) public {
-        require(winner != address(0), "Game already played");
-        require(hashFunction(word) == wordHash, "Invalid word");
-        winner = msg.sender;
+    function playWord(bytes calldata _proof, bytes32[] calldata _publicInputs) public {
+        require(wordLength > 0, "Game hasn't been initialized");
+        require(verifier.verify( _proof, _publicInputs), "Invalid proof");
+        require(winner == address(0), "Game already played");
+        bytes32 _wordHash = _publicInputs[2];
+        require(_wordHash == wordHash, "Invalid word");
+        winner = address(uint160(uint256(_publicInputs[1])));
     }
 
     // Nos ayuda hashear la palabra, puedes usarla para calcular el commitment antes de lanzar el contrato

@@ -55,6 +55,7 @@ flowchart LR
 3. **Compile Noir circuit & generate verifier**
    ```bash
    # Compile the circuit
+   cd circuit
    nargo compile
 
    # Generate verification key & Solidity verifier
@@ -63,11 +64,11 @@ flowchart LR
    ```
 
 4. **Deploy contracts**
-   - Deploy `circuits/Verifier.sol` first to your Holesky network.
-   - Deploy `contracts/SimpleHangman.sol`, passing the verifier address to the constructor.
+   - Deploy the `HonkVerifier` contract from `circuits/Verifier.sol` first. You will need to set optimization runs to `200`.
+   - Deploy `SimpleHangman` contract from `contracts/SimpleHangman.sol`, passing the verifier address to the constructor.
 
 5. **Configure frontend**
-   - Update `web3_stuff.js` with your deployed `CONTRACT_ADDRESS`.
+   - Update `web3_stuff.js` with your deployed `CONTRACT_ADDRESS` and `CHAIN_ID` to the chain you deployed the contract.
 
 ---
 

@@ -1,8 +1,12 @@
-import { loadDapp, submitAdminProof, submitPlayerProof } from './web3_stuff.js';
+import { connectWallet, loadDapp, submitAdminProof, submitPlayerProof } from './web3_stuff.js';
 import { generateProof, show } from './zk_stuff.js';
 
 // Initialize dapp
 loadDapp();
+
+document.getElementById("connect_button").addEventListener("click", async () => {
+  connectWallet();
+});
 
 document.getElementById("admin_submit").addEventListener("click", async () => {
   const word = document.getElementById("admin_word").value;
