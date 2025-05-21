@@ -12,7 +12,7 @@ We build and connect three main components:
 
 1. A **Noir circuit** that validates and hashes the secret word.
 2. A **Solidity verifier contract** that checks ZK proofs on-chain.
-3. A **Web3-powered frontend** to generate proofs and interact with the contracts.
+3. A **Web3 frontend** to generate proofs and interact with the contracts.
 
 ---
 
@@ -23,7 +23,6 @@ flowchart LR
   A[User's Browser] -->|Generate ZK Proof| B[Noir Circuit + UltraHonk Backend]
   B -->|Submit Proof| C[Verifier Contract]
   C -->|on-chain validation| D[SimpleHangman.sol]
-  D --> E[Ethereum Holesky]
 ```
 
 ---
@@ -32,10 +31,9 @@ flowchart LR
 
 - [Node.js](https://nodejs.org/) (v20+)
 - [Bun](https://bun.sh/) (for package management and dev server)
-- [MetaMask](https://metamask.io/) or any EVM-compatible wallet
-- Holesky testnet (Network ID: `17000`)
+- Browser wallet, I recommend [Rabby](https://rabby.io/) browser extension, Metamask has not been working well for me lately
+- Holesky testnet (Network ID: `17000`) but you can use any EVM chain
 - `noirup` (for Noir toolchain)
-- `bb` (Aztec CLI for proof & verifier generation)
 
 ---
 
@@ -68,7 +66,7 @@ flowchart LR
    - Deploy `SimpleHangman` contract from `contracts/SimpleHangman.sol`, passing the verifier address to the constructor.
 
 5. **Configure frontend**
-   - Update `web3_stuff.js` with your deployed `CONTRACT_ADDRESS` and `CHAIN_ID` to the chain you deployed the contract.
+   - Update `web3_stuff.js` with your deployed `CONTRACT_ADDRESS` and `CHAIN_ID` to the chain you deployed the contract. This demo defaults to Holesky `17000` chain.
 
 ---
 
@@ -120,5 +118,4 @@ bunx vite
 
 ## License
 
-[MIT](LICENSE)
-
+MIT
